@@ -1,6 +1,6 @@
 import { useState } from "react";
-import logo from "./logo.svg";
-import poweredBy from "./powered-by-vitawind-dark.png";
+import logo from "./assets/logo.svg";
+import poweredBy from "./assets/powered-by-vitawind-dark.png";
 
 function App() {
   const [count, setCount] = useState(0);
