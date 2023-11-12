@@ -1,9 +1,14 @@
 import slowpoke from "../assets/slowpoke.png";
 import LoginButton from "../pages/Login";
 import LogoutButton from "../pages/Logout";
-import Profile from "../pages/Profile";
+import { Outlet, Link } from "react-router-dom";
+import React, { useState } from "react";
 
 function Navbar() {
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
   return (
     <>
       <div className="navbar bg-base-100">
@@ -11,7 +16,7 @@ function Navbar() {
           <div className="dropdown">
             <label className="btn btn-circle swap swap-rotate">
               {/* this hidden checkbox controls the state */}
-              <input type="checkbox" />
+              <input type="checkbox" onClick={toggleMenu} />
 
               {/* hamburger icon */}
               <svg
@@ -35,20 +40,25 @@ function Navbar() {
                 <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
               </svg>
             </label>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
-            >
-              <li>
-                <a>Homepage</a>
-              </li>
-              <li>
-                <a>Portfolio</a>
-              </li>
-              <li>
-                <a>About</a>
-              </li>
-            </ul>
+            {showMenu && (
+              <div>
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content swap-on rounded-box menu-sm z-[1] w-52 bg-base-100 p-2 shadow"
+                >
+                  <li>
+                    <Link to={`home`}>Home</Link>
+                  </li>
+                  <li>
+                    <a>Portfolio</a>
+                  </li>
+                  <li>
+                    <a>About</a>
+                  </li>
+                </ul>
+                <ul className="swap-off"></ul>
+              </div>
+            )}
           </div>
         </div>
         <div className="navbar-center">
@@ -88,10 +98,7 @@ function Navbar() {
               className="menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
             >
               <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
+                <Link to={`profile`}>Profile</Link>
               </li>
               <li>
                 <LoginButton />
@@ -105,6 +112,9 @@ function Navbar() {
             </ul>
           </div>
         </div>
+      </div>
+      <div id="detail">
+        <Outlet />
       </div>
     </>
   );

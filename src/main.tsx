@@ -9,6 +9,8 @@ import Hero from "./components/Hero";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Profile from "./pages/Profile";
+import { CallbackPage } from "./pages/CallbackPage";
+import Drawer from "./components/Drawer";
 
 const DOMAIN: string = import.meta.env.VITE_AUTH0_DOMAIN;
 const CLIENTID: string = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -17,8 +19,22 @@ const CALLBACK: string = import.meta.env.VITE_AUTH0_CALLBACK_URL;
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Hero />,
+    element: <Drawer />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "callback",
+        element: <CallbackPage />,
+      },
+      {
+        path: "home",
+        element: <App />,
+      },
+    ],
   },
 ]);
 
@@ -31,10 +47,7 @@ ReactDOM.render(
         redirect_uri: CALLBACK,
       }}
     >
-      <Navbar />
       <RouterProvider router={router} />
-      <Profile />
-      <Footer />
     </Auth0Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -2,12 +2,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const LogoutButton = () => {
   const { logout } = useAuth0();
-  const CALLBACK = import.meta.env.VITE_AUTH0_CALLBACK_URL;
+  const HOME = import.meta.env.VITE_AUTH0_HOME_URL;
 
   return (
-    <button onClick={() => logout({ logoutParams: { returnTo: CALLBACK } })}>
+    <div onClick={() => logout({ logoutParams: { returnTo: HOME } })}>
       Log Out
-    </button>
+    </div>
   );
 };
 

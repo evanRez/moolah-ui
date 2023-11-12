@@ -2,9 +2,9 @@ import React from "react";
 import Navbar from "../components/Navbar";
 
 export const CallbackPage = () => {
+  console.log("At the Callout Page");
   return (
     <div>
-      <Navbar />
       <div className="h-screen" />
     </div>
   );
